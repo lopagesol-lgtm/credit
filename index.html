@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#b51f2b" />
+  <title>SECURED WALLET</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #b51f2b;
+      --red-dark: #941923;
+      --red-soft: #fff1f2;
+      --ink: #20242b;
+      --muted: #737b87;
+      --line: #ececef;
+      --surface: #ffffff;
+      --page: #f7f7f8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; color: var(--ink);
+      font-family: "DM Sans", sans-serif;
+      background: var(--page);
+    }
+    button, input { font: inherit; }
+    .shell { min-height: 100vh; display: grid; place-items: center; padding: 28px 18px; }
+    .login-card {
+      width: min(100%, 430px); padding: 38px;
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: 18px; box-shadow: 0 12px 40px rgba(27, 31, 38, .07);
+    }
+    .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; }
+    .brand-mark {
+      width: 44px; height: 44px; display: grid; place-items: center;
+      border-radius: 12px; background: var(--red); color: #fff;
+      font: 800 21px Manrope, sans-serif;
+    }
+    .brand-name { font: 800 18px Manrope, sans-serif; letter-spacing: .2px; }
+    .powered { color: var(--muted); font-size: 11px; margin-top: 3px; }
+    .eyebrow { color: var(--red); text-transform: uppercase; letter-spacing: 1.5px; font-size: 10px; font-weight: 700; }
+    h1 { font: 800 28px/1.2 Manrope, sans-serif; margin: 10px 0 9px; letter-spacing: -.7px; }
+    .sub { color: var(--muted); font-size: 14px; line-height: 1.6; margin: 0 0 26px; }
+    label { display: block; margin: 17px 0 8px; font-size: 13px; color: #343a43; font-weight: 700; }
+    input {
+      width: 100%; border: 1px solid #dfe1e5; background: #fff; color: var(--ink);
+      padding: 14px 14px; border-radius: 10px; outline: none; transition: .2s;
+    }
+    input:focus { border-color: var(--red); box-shadow: 0 0 0 3px rgba(181,31,43,.09); }
+    input::placeholder { color: #a0a5ad; }
+    .hint { color: #858c96; font-size: 11px; margin-top: 7px; }
+    .error { color: var(--red); font-size: 12px; min-height: 18px; margin-top: 12px; }
+    .primary {
+      width: 100%; border: 0; padding: 14px; border-radius: 10px;
+      background: var(--red); color: white; font-weight: 700; cursor: pointer;
+      transition: background .2s, transform .2s; margin-top: 8px;
+    }
+    .primary:hover { background: var(--red-dark); transform: translateY(-1px); }
+    .demo-note {
+      margin-top: 21px; padding: 12px 13px; border-radius: 10px;
+      background: #fff7f7; border: 1px solid #f5d9dc;
+      color: #76575a; font-size: 11px; line-height: 1.55;
+    }
+    .dashboard { display: none; width: min(100%, 900px); }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 38px; }
+    .logout { border: 1px solid #e1e2e5; color: #343a43; background: #fff; padding: 10px 15px; border-radius: 9px; cursor: pointer; }
+    .welcome { color: var(--muted); margin: 0 0 7px; font-size: 14px; }
+    .dash-title { font: 800 clamp(25px, 4vw, 34px) Manrope, sans-serif; margin: 0; letter-spacing: -.8px; }
+    .balance-card {
+      margin-top: 26px; padding: clamp(26px, 5vw, 42px); border-radius: 17px;
+      background: var(--red); color: #fff; box-shadow: 0 12px 30px rgba(181,31,43,.14);
+    }
+    .balance-label { color: rgba(255,255,255,.83); font-size: 14px; }
+    .amount { font: 800 clamp(42px, 8vw, 60px) Manrope, sans-serif; letter-spacing: -2px; margin: 12px 0 7px; }
+    .currency { color: rgba(255,255,255,.8); font-size: 13px; }
+    .status { display: inline-flex; align-items: center; gap: 8px; padding: 8px 11px; background: rgba(255,255,255,.14); border-radius: 99px; color: #fff; font-size: 11px; margin-top: 25px; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: #fff; }
+    .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 16px; }
+    .info { padding: 19px; border: 1px solid var(--line); border-radius: 13px; background: #fff; }
+    .info small { color: var(--muted); display: block; margin-bottom: 8px; }
+    .info strong { font: 700 14px Manrope, sans-serif; }
+    .footer { text-align: center; color: #8b919a; font-size: 10px; line-height: 1.6; margin: 25px auto 0; max-width: 680px; }
+    @media (max-width: 520px) {
+      .login-card { padding: 27px 22px; }
+      .info-grid { grid-template-columns: 1fr; }
+      .topbar { align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="login-card" id="loginView" aria-labelledby="loginTitle">
+      <div class="brand">
+        <div class="brand-mark">S</div>
+        <div>
+          <div class="brand-name">SECURED WALLET</div>
+          <div class="powered">Powered by Members´ Advantage Credit Union</div>
+        </div>
+      </div>
+      <div class="eyebrow">Member access · </div>
+      <h1 id="loginTitle">Welcome back</h1>
+      <p class="sub">Sign in to view your wallet dashboard.</p>
+      <form id="loginForm" novalidate>
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" placeholder="Enter any username" autocomplete="off" required />
+        <label for="dob">Password · Date of birth</label>
+        <input id="dob" name="dob" type="password" inputmode="numeric" maxlength="8" placeholder="DDMMYYYY" autocomplete="off" required />
+        <div class="hint">Enter 8 digits in DDMMYYYY format (example: 15081999).</div>
+        <div class="error" id="error" role="alert"></div>
+        <button class="primary" type="submit">Login</button>
+      </form>
+     
+    </section>
+
+    <section class="dashboard" id="dashboardView" aria-label="Wallet dashboard">
+      <header class="topbar">
+        <div class="brand" style="margin:0">
+          <div class="brand-mark">S</div>
+          <div>
+            <div class="brand-name">SECURED WALLET</div>
+            <div class="powered">Powered by Members´ Advantage Credit Union</div>
+          </div>
+        </div>
+        <button class="logout" id="logoutBtn" type="button">Log out</button>
+      </header>
+      <p class="welcome" id="welcomeText">Welcome back</p>
+      <h1 class="dash-title">Your wallet overview</h1>
+      <div class="balance-card">
+        <div class="balance-label">Available balance</div>
+        <div class="amount">$11,000.00</div>
+        <div class="currency">USD · US Dollar</div>
+        <div class="status"><span class="dot"></span>Available balance</div>
+      </div>
+      <div class="info-grid">
+        <div class="info"><small>Wallet status</small><strong>Active account</strong></div>
+        <div class="info"><small>Account currency</small><strong>USD ($)</strong></div>
+      </div>
+      <p class="footer">
+    </section>
+  </main>
+  <script>
+    const loginView = document.getElementById('loginView');
+    const dashboardView = document.getElementById('dashboardView');
+    const form = document.getElementById('loginForm');
+    const error = document.getElementById('error');
+    const dobInput = document.getElementById('dob');
+
+    function validDate(value) {
+      if (!/^\d{8}$/.test(value)) return false;
+      const day = Number(value.slice(0, 2));
+      const month = Number(value.slice(2, 4));
+      const year = Number(value.slice(4, 8));
+      if (year < 1900 || year > 2099 || month < 1 || month > 12) return false;
+      const date = new Date(year, month - 1, day);
+      return date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day;
+    }
+
+    dobInput.addEventListener('input', () => {
+      dobInput.value = dobInput.value.replace(/\D/g, '').slice(0, 8);
+    });
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const username = document.getElementById('username').value.trim();
+      const dob = dobInput.value.trim();
+      if (!username) { error.textContent = 'Please enter a username.'; return; }
+      if (!validDate(dob)) { error.textContent = 'Enter a valid date in DDMMYYYY format.'; return; }
+      document.getElementById('welcomeText').textContent = `Welcome back, ${username}`;
+      loginView.style.display = 'none';
+      dashboardView.style.display = 'block';
+    });
+
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      form.reset();
+      error.textContent = '';
+      dashboardView.style.display = 'none';
+      loginView.style.display = 'block';
+    });
+  </script>
+</body>
+</html>
